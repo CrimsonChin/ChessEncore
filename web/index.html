@@ -1,0 +1,32 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="css/chessboard-1.0.0.min.css"/>
+    </head>
+    <body>
+        <div id="gameboard" style="width: 400px"></div>
+        <button id="startBtn">Reset</button>
+        <button id="clearBtn">Clear</button>
+        <button id="toFen">Output to console</button>
+        <input id="fen" type="text" value="rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"/>
+        <button id="fromFen">Init</button>
+    </body>
+    <script src="js/jquery-3.5.1.min.js"></script>
+    <script src="js/chessboard-1.0.0.min.js"></script>
+    <script>
+        var board = Chessboard('gameboard', {
+            draggable: true,
+            dropOffBoard: 'trash',
+            sparePieces: true
+        })
+
+        board.start()
+
+        $('#startBtn').on('click', board.start)
+        $('#clearBtn').on('click', board.clear)
+        $('#toFen').on('click', () => { console.log(board.fen()) })
+        $('#fromFen').on('click', () => { 
+            var fen = $('#fen').val()
+            board.position(fen) 
+        })
+    </script>
+</html>
